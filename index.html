@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>password strength check</title>
+  
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- google font (poppin) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+
+    }
+    .container{
+      height: 100vh;
+      width: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .input-box{
+      width: 200px;
+      max-width: 90%;
+      position: relative;
+    }
+    .input-box input{
+      width: 100%;
+      height: 40px;
+      padding: 0 20px;
+      border: 1px solid #ccc;
+      outline: none;
+      caret-color: royalblue;
+      border-radius: 5px;
+    }
+    .input-box button{
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background-color: transparent;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+      border: none;
+    }
+    .input-box .msg{
+      position: absolute;
+      bottom: -30px;
+      font-size: 15px;
+      display: none;
+    }
+    .title{
+      color:azure;
+      position: absolute;
+      top: 30%;
+      font-size: 1.2rem;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Check Password Strength</h1>
+      <div class="input-box">
+        <input type="password" placeholder="Password" class="password" maxlength="12">
+        <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+        <p class="msg">Password is <span class="strength"></span> </p>
+      </div>
+  </div>
+
+  <script>
+    function $(e){
+      return document.querySelector(e);
+    }
+
+    let pass = $('.password'),
+    msg = $('.msg'),
+    str = $('.strength');
+
+    pass.addEventListener('input',e=>{
+
+      if(pass.value.length > 0){
+        msg.style.display = 'block';
+      }else{
+        msg.style.display = 'none';
+      }
+
+      if(pass.value.length < 4){
+        str.innerText = 'weak';
+        msg.style.color = '#ff5925';
+        pass.style.border = '2px solid #ff5925';
+        
+      }else if(pass.value.length >= 4 && pass.value.length < 8){
+        str.innerText = 'medium';
+        msg.style.color = 'yellow';
+        pass.style.border = '2px solid yellow';
+      }else if(pass.value.length >= 8){
+        str.innerText = 'strong';
+        msg.style.color = '#26d730';
+        pass.style.border = '2px solid #26d730';
+      }
+      if(pass.value.length == 0){
+        pass.style.border = '2px solid transparent';
+      }
+    })
+
+
+  </script>
+</body>
+</html>
